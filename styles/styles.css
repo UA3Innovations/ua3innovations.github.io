@@ -1,0 +1,53 @@
+/* Genel body stil ayarları */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+/* Header ayarları */
+header {
+  background-color: #333;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+/* Logo ayarları */
+.logo {
+  height: 50px;
+  margin-top: 10px;
+}
+
+/* İçerik stil ayarları */
+.content {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Başlıklar için stil ayarları */
+h1, h2 {
+  margin-bottom: 10px;
+}
+
+/* Paragraf stil ayarları */
+p {
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+/* Responsive tasarım için medya sorgusu */
+@media (max-width: 768px) {
+  header {
+      padding: 15px;
+  }
+
+  .content {
+      padding: 15px;
+  }
+}
