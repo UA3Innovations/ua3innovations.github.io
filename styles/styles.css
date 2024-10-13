@@ -105,7 +105,27 @@ nav a:hover {
 }
 
 .contact-info strong {
-    color: #1c3d5a;
+    color: #1f5f54;
+}
+
+.proposal {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+    text-align: left;
+}
+
+.proposal h3 {
+    color: #1f5f54;
+    margin-bottom: 10px;
+}
+
+.proposal p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #333;
 }
 
 
