@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UA3Innovations - Smart Public Transport</title>
+    <link rel="icon" type="image/png" href="logo3.png">
+    <style>
+        :root {
+            --primary-color: #1f5f54;
+            --secondary-color: #333;
+            --accent-color: #3498db;
+            --light-color: #f8f9fa;
+            --dark-color: #222;
+            --text-color: #333;
+            --light-text: #f8f9fa;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-color);
+        }
+        
+        /* Header & Navigation */
+        header {
+            background-color: var(--primary-color);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 50px;
+            margin-right: 15px;
+        }
+        
+        .logo h1 {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 25px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            position: relative;
+            padding: 5px 0;
+            transition: 0.3s;
+        }
+        
+        nav ul li a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: white;
+            transition: width 0.3s;
+        }
+        
+        nav ul li a:hover:after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/api/placeholder/1920/1080') center/cover no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 0 20px;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            animation: fadeInDown 1s ease-out;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        .hero-btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            animation: fadeIn 1.5s ease-out;
+        }
+        
+        .hero-btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Sections */
+        section {
+            padding: 100px 10%;
+        }
+        
+        section:nth-child(even) {
+            background-color: white;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-header h2:after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 3px;
+            background-color: var(--accent-color);
+            bottom: -10px;
+            left: 25%;
+        }
+        
+        .section-header p {
+            color: #777;
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* About Section */
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-text p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+        .about-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: 400px;
+            transition: transform 0.5s;
+        }
+        
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* Proposals Section */
+        .proposal {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-bottom: 30px;
+            transition: transform 0.3s;
+        }
+        
+        .proposal:hover {
+            transform: translateY(-5px);
+        }
+        
+        .proposal h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .proposal p {
+            margin-bottom: 15px;
+        }
+        
+        /* Team Section */
+        .team-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .team-member {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        .member-info h3 {
+            margin-bottom: 15px;
+            color: var(--primary-color);
+            font-size: 1.5rem;
+        }
+        
+        .member-info p {
+            color: #777;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            color: #777;
+            transition: color 0.3s;
+            text-decoration: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            background-color: #f5f5f5;
+        }
+        
+        .social-links a:hover {
+            color: white;
+            background-color: var(--accent-color);
+        }
+        
+        /* Reports Section */
+        .reports-list {
+            list-style: none;
+        }
+        
+        .reports-list li {
+            margin-bottom: 15px;
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+        }
+        
+        .reports-list li:hover {
+            transform: translateX(10px);
+        }
+        
+        .reports-list a {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .reports-list a:before {
+            content: '📄';
+            margin-right: 15px;
+            font-size: 1.5rem;
+        }
+        
+        /* Additional styles can be added here if needed */
+        
+        /* Features Section */
+        .features-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: var(--light-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-card h3 {
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .feature-card p {
+            color: #555;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        
+        .contact-container {
+            display: flex;
+            justify-content: center;
+        }
+        
+        .contact-info {
+            max-width: 600px;
+        }
+        
+        .contact-info h3 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        
+        .info-item {
+            margin-bottom: 30px;
+        }
+        
+        .info-item strong {
+            color: var(--primary-color);
+            font-size: 1.1rem;
+        }
+        
+        .info-item p {
+            margin-top: 5px;
+            font-size: 1.1rem;
+        }
+        
+        .info-item a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .info-item a:hover {
+            color: #2980b9;
+            text-decoration: underline;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: var(--light-text);
+            padding: 70px 10% 20px;
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 25px;
+            font-size: 1.3rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 2px;
+            background-color: var(--accent-color);
+            bottom: 0;
+            left: 0;
+        }
+        
+        .footer-column p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .footer-column a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+        
+        .footer-column a.github-link {
+            color: #ff0000;
+        }
+        
+        .footer-column a.github-link:hover {
+            color: #ff6666;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #aaa;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid #444;
+            padding-top: 20px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .contact-container {
+                flex-direction: column;
+            }
+            
+            /* Removed timeline responsive styles */
+        }
+        
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            section {
+                padding: 80px 5%;
+            }
+            
+            .section-header h2 {
+                font-size: 2rem;
+            }
+            
+            .contact-card {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="logo3.png" alt="UA3Innovations Logo">
+                <h1>UA3Innovations</h1>
+            </div>            
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#proposals">Proposals</a></li>
+                    <li><a href="#team">Team</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#reports">Reports</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <div class="mobile-menu-btn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <h1>Innovating the Future of Public Transportation</h1>
+        <p>We are dedicated to creating smart, efficient, and sustainable solutions for optimizing public transportation in Ankara using AI and advanced technologies.</p>
+        <a href="#about" class="hero-btn">Learn More</a>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="section-header">
+            <h2>About Our Project</h2>
+            <p>Revolutionizing urban mobility through intelligent solutions</p>
+        </div>
+        <div class="about-content">
+            <div class="about-text">
+                <p>We are UA3Innovations, a team of senior Computer Engineering students dedicated to creating innovative solutions for optimizing public transportation in Ankara using AI and advanced technologies. Our goal is to provide smart, efficient, and sustainable solutions to improve urban mobility.</p>
+                <p>The Smart Public Transport Optimization project aims to leverage artificial intelligence to enhance the availability and effectiveness of public transportation in Ankara, serving the growing urban population with improved routes, schedules, and resource allocation.</p>
+                <p>By combining predictive analysis and intelligent algorithms, we aim to significantly reduce waiting times, traffic congestion, and operational costs while improving the overall public transportation experience.</p>
+            </div>
+            <div class="about-image">
+                <img src="logo1.png" alt="UA3Innovations Logo">
+            </div>            
+        </div>
+    </section>
+
+    <!-- Proposals Section -->
+    <section id="proposals">
+        <div class="section-header">
+            <h2>Our Proposals</h2>
+            <p>Detailed information about our project vision and objectives</p>
+        </div>
+        <div class="proposal">
+            <h3>Smart Public Transport Optimization for Ankara</h3>
+            <p><strong>Team Members:</strong> Aleyna Alemdar, Aşkın Gündüz, Ataberk Kılavuzcu, Umut Ulaş Balcı</p>
+            <p><strong>Supervisors:</strong> Saiful Islam, Müslim Bozyiğit</p>
+            <p><strong>Jury Members:</strong> Eren Ulu, Gökçe Nur Yılmaz</p>
+            <p><strong>Project Web Page:</strong> <a href="https://ua3innovations.github.io/" target="_blank">https://ua3innovations.github.io/</a></p>
+            <p><strong>Project Description:</strong></p>
+            <p>The purpose of this project is to employ artificial intelligence to increase the availability and effectiveness of public transportation in Ankara. The project's main goal is to create an intelligent system that will improve public transportation routes, schedules, and resource allocation in order to better serve Ankara's growing urban population.</p>
+            <p>Our project will improve public transportation organizations' decision-making processes by leveraging AI, machine learning, and real-time data analytics. Additionally, this technology will take user preferences into account and give passengers real-time information, improving the convenience and reliability of public transit.</p>
+            <p>Our goal is to significantly cut down on waiting times, traffic, and operating expenses by combining predictive analysis and intelligent algorithms. We believe that this project's completion will have a significant impact on the growth of smart cities and the effectiveness of public transportation.</p>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team">
+        <div class="section-header">
+            <h2>Meet Our Team</h2>
+            <p>The talented individuals behind UA3Innovations</p>
+        </div>
+        <div class="team-container">
+            <div class="team-member">
+                <div class="member-info">
+                    <h3>Aleyna Alemdar</h3>
+                    <p>Developer</p>
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/in/aleynaalemdar/" target="_blank" aria-label="LinkedIn">LinkedIn</a>
+                        <a href="https://github.com/aleynaalemdar" target="_blank" aria-label="GitHub">GitHub</a>
+                    </div>
+                </div>
+            </div>
+            <div class="team-member">
+                <div class="member-info">
+                    <h3>Aşkın Gündüz</h3>
+                    <p>Developer</p>
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/in/askin-gunduz/" target="_blank" aria-label="LinkedIn">LinkedIn</a>
+                        <a href="https://github.com/askingunduzz" target="_blank" aria-label="GitHub">GitHub</a>
+                    </div>
+                </div>
+            </div>
+            <div class="team-member">
+                <div class="member-info">
+                    <h3>Ataberk Kılavuzcu</h3>
+                    <p>Developer</p>
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/in/ataberk-kilavuzcu/" target="_blank" aria-label="LinkedIn">LinkedIn</a>
+                        <a href="https://github.com/ataberkkilavuzcu" target="_blank" aria-label="GitHub">GitHub</a>
+                    </div>
+                </div>
+            </div>
+            <div class="team-member">
+                <div class="member-info">
+                    <h3>Umut Ulaş Balcı</h3>
+                    <p>Developer</p>
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/in/umut-ulas-balci/" target="_blank" aria-label="LinkedIn">LinkedIn</a>
+                        <a href="https://github.com/Balghi" target="_blank" aria-label="GitHub">GitHub</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Features Section -->
+    <section id="features">
+        <div class="section-header">
+            <h2>Key Features</h2>
+            <p>Innovative technologies powering our solution</p>
+        </div>
+        <div class="features-container">
+            <div class="feature-card">
+                <h3>AI-Powered Prediction</h3>
+                <p>Advanced machine learning algorithms that forecast passenger demand patterns with high accuracy based on historical data and real-time inputs.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Route Optimization</h3>
+                <p>Dynamic route planning algorithms that minimize travel time, reduce congestion, and maximize fleet utilization across Ankara's public transportation network.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>Enhanced User Experience</h3>
+                <p>Passenger-focused interface providing real-time updates, accurate arrival predictions, and personalized journey recommendations.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Intelligent Resource Allocation</h3>
+                <p>Optimal allocation of vehicles, drivers, and maintenance resources based on predicted needs and operational constraints.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Sustainability Metrics</h3>
+                <p>Environmental impact monitoring and optimization to reduce emissions and promote sustainable urban transportation strategies.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Data Integration Platform</h3>
+                <p>A comprehensive system for collecting, processing, and analyzing transportation data from multiple sources, integrating real-time vehicle tracking, passenger counts, traffic conditions, and event information to create a unified data foundation for our AI models.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reports Section -->
+    <section id="reports">
+        <div class="section-header">
+            <h2>Project Reports</h2>
+            <p>Detailed documentation of our project progress and findings</p>
+        </div>
+        <ul class="reports-list">
+            <li>
+                <a href="https://drive.google.com/file/d/15Loppz5CFQ0sGTlSPGmYShVKFJ-ysKX6/view?usp=sharing" target="_blank">
+                    Project Proposal - UA3Innovations
+                </a>
+            </li>
+            <li>
+                <a href="https://drive.google.com/file/d/1F6J7zz207QYZ94L6zWbiNzHHtfEMMwad/view?usp=sharing" target="_blank">
+                    Project Analysis Report - UA3Innovations
+                </a>
+            </li>
+            <li>
+                <a href="https://drive.google.com/file/d/1x-ZyYp21j8rRjO3tiamUggnOmGLhgLNL/view?usp=sharing" target="_blank">
+                    Project Specifications Form - UA3Innovations
+                </a>
+            </li>
+            <li>
+                <a href="https://drive.google.com/file/d/1PPehvw5aRsFwssQKXEEjojA6hC0tcX97/view?usp=sharing" target="_blank">
+                    High Level Design Report - UA3Innovations
+                </a>
+            </li>
+            <li>
+                <a href="https://drive.google.com/file/d/1xPkMoDOtfPdvcdaOjdgGVzGWyWLEL58C/view?usp=sharing" target="_blank">
+                    Low Level Design Report - UA3Innovations
+                </a>
+            </li>
+            <li>
+                <a href="https://drive.google.com/file/d/12HxP9uqJF5u1T2qDiP1cpwDJkHDLaCFb/view?usp=sharing" target="_blank">
+                    Test Plan Report - UA3Innovations
+                </a>
+            </li>
+            <li>
+                <a href="https://drive.google.com/file/d/1UZW-bf82o8LNGB1aCrUflUP6OAWnzSWc/view?usp=sharing" target="_blank">
+                    Backlog Document - UA3Innovations
+                </a>
+            </li>
+            <li>
+                <a href="https://drive.google.com/file/d/1oVQ6eFCFEKjb-41EFZSZn0Z57uwCg5Fs/view?usp=sharing" target="_blank">
+                    Final Report - UA3Innovations
+                </a>
+            </li>
+        </ul>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="section-header">
+            <h2>Contact Us</h2>
+            <p>Get in touch with the UA3Innovations team</p>
+        </div>
+        <div class="contact-container">
+            <div class="contact-info" style="flex: 1;">
+                <h3>Our Information</h3>
+                <div class="info-item">
+                    <div>
+                        <strong>Address:</strong>
+                        <p>TED University, Ziya Gökalp Caddesi No:48, Kolej, 06420 Ankara, Turkey</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div>
+                        <strong>Email:</strong>
+                        <p><a href="mailto:ua3innovations@gmail.com">ua3innovations@gmail.com</a></p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div>
+                        <strong>Working Hours:</strong>
+                        <p>Monday - Friday: 9:00 AM - 5:00 PM</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>UA3Innovations</h3>
+                <p>Innovating the future of public transportation with smart, efficient, and sustainable solutions powered by artificial intelligence and advanced technologies.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#proposals">Proposals</a></li>
+                    <li><a href="#team">Team</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#reports">Reports</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Project Information</h3>
+                <p>Our Smart Public Transport Optimization project leverages AI and machine learning to improve transportation efficiency in Ankara, creating a more sustainable and accessible urban environment.</p>
+                <p>Follow our progress on <a href="https://github.com/ua3innovations" target="_blank" class="github-link">GitHub</a> to see our latest developments.</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 UA3Innovations. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Simple JavaScript for enhanced functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Header scroll effect
+            const header = document.querySelector('header');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    header.style.padding = '10px 0';
+                    header.style.backgroundColor = 'rgba(31, 95, 84, 0.95)';
+                } else {
+                    header.style.padding = '15px 0';
+                    header.style.backgroundColor = 'var(--primary-color)';
+                }
+            });
+            
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Mobile menu toggle
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const navUl = document.querySelector('nav ul');
+            
+            if (mobileMenuBtn) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    navUl.style.display = navUl.style.display === 'flex' ? 'none' : 'flex';
+                });
+            }
+        });
+    </script>
+</body>
+</html>
